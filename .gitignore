@@ -1,0 +1,17 @@
+# Server
+**/bin/
+**/obj/
+
+# Dependencies
+**/node_modules/
+
+# Build results
+**/build/
+**/dist/
+
+# .vscode  
+.vscode/
+
+# Environment files
+.env
+
