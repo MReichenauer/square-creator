@@ -1,5 +1,8 @@
 using System.Text.Json;
 using api.models;
+using api.Services.GenerateSquareIdService;
+using api.Services.JsonDataService;
+using api.Services.ValidateColorService;
 
 namespace api.repositories
 {
@@ -8,56 +11,36 @@ namespace api.repositories
         private readonly string _squaresDataFilePath;
         private readonly string _lastSquareDataFilePath;
         private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = false };
+        private readonly IJsonDataService _jsonDataService;
+        private readonly IGenerateSquareIdService<Square> _generateSquareIdService;
+        private readonly IValidateColorService _validateColorService;
 
-        public SquareRepository(IWebHostEnvironment environment)
+        public SquareRepository(IWebHostEnvironment environment, IJsonDataService jsonDataService, IGenerateSquareIdService<Square> generateSquareIdService, IValidateColorService validateColorService)
         {
             var dataDirectory = Path.Combine(environment.ContentRootPath, "Data");
             _squaresDataFilePath = Path.Combine(dataDirectory, "SquareData.json");
             _lastSquareDataFilePath = Path.Combine(dataDirectory, "LastSquareData.json");
+            _jsonDataService = jsonDataService;
+            _generateSquareIdService = generateSquareIdService;
+            _validateColorService = validateColorService;
         }
 
         public IEnumerable<Square> GetAll()
         {
-            List<Square> storedSquares = [];
-            storedSquares = [.. File.ReadLines(_squaresDataFilePath)
-           .Where(line => !string.IsNullOrWhiteSpace(line))
-           .Select(line => JsonSerializer.Deserialize<Square>(line))];
-            return storedSquares;
+            return _jsonDataService.ReadObjects<Square>(_squaresDataFilePath, _jsonSerializerOptions);
         }
 
         public void Insert(Square square)
         {
-            Square? lastStoredSquare = null;
-            string data = File.ReadAllText(_lastSquareDataFilePath);
-            if (data != null)
-            {
-                lastStoredSquare = JsonSerializer.Deserialize<Square>(data);
+            Square? lastSquare = _jsonDataService
+               .ReadObjects<Square>(_lastSquareDataFilePath, _jsonSerializerOptions)
+               .LastOrDefault();
 
-            }
-            int id = 1;
-            if (lastStoredSquare != null)
+            square.Id = _generateSquareIdService.GenerateId(lastSquare);
+            _validateColorService.ValidateColor(square.Color, lastSquare?.Color ?? string.Empty);
+            _jsonDataService.AppendObject(_squaresDataFilePath, square, _jsonSerializerOptions);
+            _jsonDataService.OweriteObject(_lastSquareDataFilePath, square, _jsonSerializerOptions);
 
-            {
-                id = lastStoredSquare.Id + 1;
-                if (lastStoredSquare != null && lastStoredSquare.Color != null)
-                {
-                    if (square.Color.Equals(lastStoredSquare.Color, StringComparison.OrdinalIgnoreCase))
-                    {
-                        throw new InvalidOperationException($"Invalid color: {square.Color} the color cannot be the same as the previous square.");
-                    }
-                }
-            }
-            square.Id = id;
-            string squareJson = JsonSerializer.Serialize(square, _jsonSerializerOptions);
-            try
-            {
-                File.AppendAllText(_squaresDataFilePath, Environment.NewLine + squareJson);
-                File.WriteAllText(_lastSquareDataFilePath, squareJson);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Failed to write square data to file: {ex.Message}");
-            }
         }
     }
 }
