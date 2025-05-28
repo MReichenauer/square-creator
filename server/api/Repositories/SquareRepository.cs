@@ -27,14 +27,13 @@ namespace api.repositories
 
         public IEnumerable<Square> GetAll()
         {
-            return _jsonDataService.ReadObjects<Square>(_squaresDataFilePath, _jsonSerializerOptions);
+            return _jsonDataService.ReadObjectsInArray<Square>(_squaresDataFilePath, _jsonSerializerOptions);
         }
 
         public void Insert(Square square)
         {
             Square? lastSquare = _jsonDataService
-               .ReadObjects<Square>(_lastSquareDataFilePath, _jsonSerializerOptions)
-               .LastOrDefault();
+               .ReadSingleObject<Square>(_lastSquareDataFilePath, _jsonSerializerOptions);
 
             square.Id = _generateSquareIdService.GenerateId(lastSquare);
             _validateColorService.ValidateColor(square.Color, lastSquare?.Color ?? string.Empty);
