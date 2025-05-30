@@ -10,7 +10,6 @@ namespace api.repositories
     {
         private readonly string _squaresDataFilePath;
         private readonly string _lastSquareDataFilePath;
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = false };
         private readonly IJsonDataService _jsonDataService;
         private readonly IGenerateSquareIdService<Square> _generateSquareIdService;
         private readonly IValidateColorService _validateColorService;
@@ -27,18 +26,18 @@ namespace api.repositories
 
         public IEnumerable<Square> GetAll()
         {
-            return _jsonDataService.ReadObjectsInArray<Square>(_squaresDataFilePath, _jsonSerializerOptions);
+            return _jsonDataService.ReadObjectsInArray<Square>(_squaresDataFilePath);
         }
 
         public void Insert(Square square)
         {
             Square? lastSquare = _jsonDataService
-               .ReadSingleObject<Square>(_lastSquareDataFilePath, _jsonSerializerOptions);
+               .ReadSingleObject<Square>(_lastSquareDataFilePath);
 
             square.Id = _generateSquareIdService.GenerateId(lastSquare);
             _validateColorService.ValidateColor(square.Color, lastSquare?.Color ?? string.Empty);
-            _jsonDataService.AppendObject(_squaresDataFilePath, square, _jsonSerializerOptions);
-            _jsonDataService.OweriteObject(_lastSquareDataFilePath, square, _jsonSerializerOptions);
+            _jsonDataService.AppendObject(_squaresDataFilePath, square);
+            _jsonDataService.OweriteObject(_lastSquareDataFilePath, square);
 
         }
     }
