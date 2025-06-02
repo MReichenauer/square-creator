@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace api.Services.JsonDataService
 {
     public interface IJsonDataService

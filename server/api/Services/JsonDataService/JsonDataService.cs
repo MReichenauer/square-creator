@@ -1,21 +1,21 @@
 using System.Text.Json;
+using api.utils;
 
 namespace api.Services.JsonDataService;
 
 public class JsonDataService : IJsonDataService
 {
-    private readonly JsonSerializerOptions _options = new() { WriteIndented = true };
-
+    private readonly JsonSerializerOptions _options = NewJsonSerializerOptions.s_indented;
     public IEnumerable<T> ReadObjectsInArray<T>(string filePath)
     {
         EnsureDirectoryExists(filePath);
         if (!File.Exists(filePath))
             return [];
 
-        string storedSquares = File.ReadAllText(filePath);
-        return string.IsNullOrWhiteSpace(storedSquares)
+        string storedArrayData = File.ReadAllText(filePath);
+        return string.IsNullOrWhiteSpace(storedArrayData)
             ? []
-            : JsonSerializer.Deserialize<List<T>>(storedSquares, _options) ?? [];
+            : JsonSerializer.Deserialize<List<T>>(storedArrayData, _options) ?? [];
     }
     public T? ReadSingleObject<T>(string filePath)
     {
@@ -23,27 +23,27 @@ public class JsonDataService : IJsonDataService
         if (!File.Exists(filePath))
             return default;
 
-        string previouslyStoredSquare = File.ReadAllText(filePath);
-        return string.IsNullOrWhiteSpace(previouslyStoredSquare)
+        string storedObjectData = File.ReadAllText(filePath);
+        return string.IsNullOrWhiteSpace(storedObjectData)
             ? default
-            : JsonSerializer.Deserialize<T>(previouslyStoredSquare, _options);
+            : JsonSerializer.Deserialize<T>(storedObjectData, _options);
     }
 
     public void AppendObject<T>(string filePath, T obj)
     {
         EnsureDirectoryExists(filePath);
-        List<T> exsistingSquaresData = [.. ReadObjectsInArray<T>(filePath)];
-        exsistingSquaresData.Add(obj);
-        string updatedSquaresData = JsonSerializer.Serialize(exsistingSquaresData, _options);
-        File.WriteAllText(filePath, updatedSquaresData);
-        Console.WriteLine(updatedSquaresData);
+        List<T> storedArrayData = [.. ReadObjectsInArray<T>(filePath)];
+        storedArrayData.Add(obj);
+        string updatedArrayData = JsonSerializer.Serialize(storedArrayData, _options);
+        File.WriteAllText(filePath, updatedArrayData);
+        Console.WriteLine(updatedArrayData);
     }
 
     public void OweriteObject<T>(string filePath, T obj)
     {
         EnsureDirectoryExists(filePath);
-        string newSquare = JsonSerializer.Serialize(obj, _options);
-        File.WriteAllText(filePath, newSquare);
+        string newObjectData = JsonSerializer.Serialize(obj, _options);
+        File.WriteAllText(filePath, newObjectData);
     }
 
     private static void EnsureDirectoryExists(string filePath)

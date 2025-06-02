@@ -1,4 +1,4 @@
-using System.Text.Json;
+using api.Dtos;
 using api.models;
 using api.Services.GenerateSquareIdService;
 using api.Services.JsonDataService;
@@ -16,7 +16,7 @@ namespace api.repositories
 
         public SquareRepository(IWebHostEnvironment environment, IJsonDataService jsonDataService, IGenerateSquareIdService<Square> generateSquareIdService, IValidateColorService validateColorService)
         {
-            var dataDirectory = Path.Combine(environment.ContentRootPath, "Data");
+            string dataDirectory = Path.Combine(environment.ContentRootPath, "Data");
             _squaresDataFilePath = Path.Combine(dataDirectory, "SquareData.json");
             _lastSquareDataFilePath = Path.Combine(dataDirectory, "LastSquareData.json");
             _jsonDataService = jsonDataService;
@@ -29,7 +29,7 @@ namespace api.repositories
             return _jsonDataService.ReadObjectsInArray<Square>(_squaresDataFilePath);
         }
 
-        public void Insert(Square square)
+        public void Insert(SquareDto square)
         {
             Square? lastSquare = _jsonDataService
                .ReadSingleObject<Square>(_lastSquareDataFilePath);
