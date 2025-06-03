@@ -9,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<ISquareRepository, SquareRepository>();
 builder.Services.AddSingleton<IJsonDataService, JsonDataService>();
 builder.Services.AddSingleton<IGenerateSquareIdService<Square>, GenerateSquareIdService>();
 builder.Services.AddSingleton<IValidateColorService, ValidateColorService>();
