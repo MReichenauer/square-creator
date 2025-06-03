@@ -1,4 +1,5 @@
 
+using api.Dtos;
 using api.models;
 using api.repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -14,15 +15,20 @@ public class SquareController(ISquareRepository squareRepository) : ControllerBa
     [HttpGet]
     public ActionResult<IEnumerable<Square>> GetAll()
     {
-        var result = _squareRepository.GetAll();
+        IEnumerable<Square> result = _squareRepository.GetAll();
         return Ok(result);
     }
     [HttpPost]
-    public ActionResult Insert(Square square)
+    public ActionResult Insert(SquareDto square)
     {
         if (square == null)
         {
-            return BadRequest("Square is cannot be null");
+            return BadRequest("Square cannot be null.");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
         }
 
         try
@@ -30,11 +36,11 @@ public class SquareController(ISquareRepository squareRepository) : ControllerBa
             _squareRepository.Insert(square);
             return CreatedAtAction(nameof(GetAll), square);
         }
-        catch (InvalidOperationException ex)
+        catch (InvalidOperationException exception)
         {
-            return Conflict(ex.Message);
-        }
+            return Conflict(new { type = "Conflict", title = "This color is used by previous square", status = 409, errors = new { Color = new[] { exception.Message } } });
 
+        }
     }
 }
 
