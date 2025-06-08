@@ -1,45 +1,20 @@
-import { squareApi } from "@services/squareApi/squareApi";
-import { useActionState } from "react";
-
 const IsolatedTestPage = () => {
-	const [result, submitAction, isPending] = useActionState(async (previousState, formData: FormData) => {
-		console.log("PREV", previousState);
-		const color = formData.get("color");
-		const x = Number(formData.get("x"));
-		const y = Number(formData.get("y"));
-		if (typeof color !== "string" || isNaN(x) || isNaN(y)) {
-			return {
-				type: "error",
-				message: "Invalid data",
-			};
-		}
-		const square = { color, x, y };
-		const res = await squareApi.insert(square);
-		console.log("RES", res);
-		return {
-			type: "success",
-			data: res,
-			message: "Square was created",
-		};
-	}, null);
-
 	return (
 		<>
-			{result && (
-				<div>
-					<p>
-						Type: {result.type} Message: {result.message}
-					</p>
-					<p>Square: {JSON.stringify(result.data)}</p>
-				</div>
-			)}
-			{isPending && <p>Loading...</p>}
-			<form action={submitAction}>
-				<input type="text" name="color" />
-				<input type="text" name="x" />
-				<input type="text" name="y" />
-				<button type="submit">Submit</button>
-			</form>
+			<h1>H1</h1>
+			<h2>H2</h2>
+			<h3>H3</h3>
+			<h4>H4</h4>
+			<h5>H5</h5>
+			<p>Paragraph</p>
+			<div style={{ display: "flex" }}>
+				<div style={{ width: "100px", height: "100px", backgroundColor: "#5890fc" }}></div>
+				<div style={{ width: "100px", height: "100px", backgroundColor: "#b17dfb" }}></div>
+				<div style={{ width: "100px", height: "100px", backgroundColor: "#f7f7f7" }}></div>
+				<div style={{ width: "100px", height: "100px", backgroundColor: "#e9e7e7" }}></div>
+				<div style={{ width: "100px", height: "100px", backgroundColor: "#212121" }}></div>
+				<div style={{ width: "100px", height: "100px", backgroundColor: "#2c2c2c" }}></div>
+			</div>
 		</>
 	);
 };
