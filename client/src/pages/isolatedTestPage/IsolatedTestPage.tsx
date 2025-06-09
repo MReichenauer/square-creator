@@ -1,19 +1,12 @@
+import { Square } from "@components/square/Square";
+
 const IsolatedTestPage = () => {
 	return (
 		<>
-			<h1>H1</h1>
-			<h2>H2</h2>
-			<h3>H3</h3>
-			<h4>H4</h4>
-			<h5>H5</h5>
-			<p>Paragraph</p>
-			<div style={{ display: "flex" }}>
-				<div style={{ width: "100px", height: "100px", backgroundColor: "#5890fc" }}></div>
-				<div style={{ width: "100px", height: "100px", backgroundColor: "#b17dfb" }}></div>
-				<div style={{ width: "100px", height: "100px", backgroundColor: "#f7f7f7" }}></div>
-				<div style={{ width: "100px", height: "100px", backgroundColor: "#e9e7e7" }}></div>
-				<div style={{ width: "100px", height: "100px", backgroundColor: "#212121" }}></div>
-				<div style={{ width: "100px", height: "100px", backgroundColor: "#2c2c2c" }}></div>
+			<div style={{ display: "flex", gap: "var(--spacing-2)" }}>
+				<Square square={{ color: "#990000", id: 1, x: 1, y: 1 }} />
+				<Square square={{ color: "#ff7518", id: 2, x: 2, y: 2 }} />
+				<Square square={{ color: "#000099", id: 3, x: 3, y: 3 }} />
 			</div>
 		</>
 	);
