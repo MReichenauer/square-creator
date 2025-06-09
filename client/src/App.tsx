@@ -1,10 +1,12 @@
+import { HomePage } from "@pages/homePage/HomePage";
+import { IsolatedTestPage } from "@pages/isolatedTestPage/IsolatedTestPage";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
 	return (
 		<Routes>
-			<Route path="/" element={<h1>Home</h1>}></Route>
-			<Route path="/about" element={<h1>About</h1>}></Route>
+			<Route path="/isolatedTest" element={<IsolatedTestPage />}></Route>
+			<Route path="/" element={<HomePage />}></Route>
 		</Routes>
 	);
 }
