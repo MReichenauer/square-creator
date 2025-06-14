@@ -1,8 +1,8 @@
-import type { SquareType } from "@models/types/squareType";
+import type { BaseSquareType } from "@models/types/square";
 import styles from "./Square.module.css";
 
 type SquareProps = {
-	square: SquareType;
+	square: BaseSquareType;
 };
 
 const Square = ({ square }: SquareProps) => {

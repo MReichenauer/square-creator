@@ -1,4 +1,4 @@
-import type { SquareType } from "@models/types/squareType";
+import type { SquareType } from "@models/types/square";
 import type { InsertSquareApiType } from "../models/types/insertSquareApiType";
 import type { ErrorResponseType } from "../models/types/errorResponseType";
 

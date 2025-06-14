@@ -1,4 +1,4 @@
-import type { SquareType } from "@models/types/squareType";
+import type { SquareType } from "@models/types/square";
 import type { ErrorResponseType } from "../models/types/errorResponseType";
 
 const baseUrl = import.meta.env.VITE_SQUARE_API_BASE_URL_DEVELOPMENT;
