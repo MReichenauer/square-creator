@@ -1,4 +1,4 @@
-import { useGridSquare } from "@components/squareGrid/hooks/useSquareGrid";
+import { useGridSquare } from "@components/squareGrid/hooks/useSquareGrid/useSquareGrid";
 import { SquareGrid } from "@components/squareGrid/SquareGrid";
 
 const IsolatedTestPage = () => {

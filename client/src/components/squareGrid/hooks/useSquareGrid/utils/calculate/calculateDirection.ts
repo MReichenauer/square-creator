@@ -1,8 +1,8 @@
 import type { CoordinatesType } from "../../types/coordinatesType";
 
-const calculateDirection = ({ x, y }: CoordinatesType, iteration: number) => {
+const calculateDirection = (columns: number, { x, y }: CoordinatesType) => {
 	if (x === 0) return "right";
-	if (y + 1 < iteration) return "down";
+	if (y + 1 < columns) return "down";
 	if (x > 0) return "left";
 	return "initial";
 };

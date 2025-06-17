@@ -3,7 +3,7 @@ import { calculateDirection } from "./calculateDirection";
 
 const calculateCoordinates = (columns: number, prevCoordinates: CoordinatesType = { x: 0, y: 0 }) => {
 	const coordinates = { ...prevCoordinates };
-	switch (calculateDirection(coordinates, columns)) {
+	switch (calculateDirection(columns, coordinates)) {
 		case "initial":
 			break;
 		case "right":
