@@ -1,4 +1,4 @@
-import type { CoordinatesType } from "../types/coordinatesType";
+import type { CoordinatesType } from "../../types/coordinatesType";
 
 const calculateDirection = ({ x, y }: CoordinatesType, iteration: number) => {
 	if (x === 0) return "right";

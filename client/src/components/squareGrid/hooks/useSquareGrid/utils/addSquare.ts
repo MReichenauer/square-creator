@@ -1,4 +1,4 @@
-import { calculateCoordinates } from "./calculateCoordinates";
+import { calculateCoordinates } from "./calculate/calculateCoordinates";
 import type { BaseSquareType } from "@models/types/square";
 import { forbiddenHexCodes } from "./colors/forbiddenHexCodes";
 import { generateSquareColor } from "./colors/generateSquareColor";

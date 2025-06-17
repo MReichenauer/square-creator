@@ -1,4 +1,4 @@
-import type { CoordinatesType } from "../types/coordinatesType";
+import type { CoordinatesType } from "../../types/coordinatesType";
 import { calculateDirection } from "./calculateDirection";
 
 const calculateCoordinates = (columns: number, prevCoordinates: CoordinatesType = { x: 0, y: 0 }) => {
