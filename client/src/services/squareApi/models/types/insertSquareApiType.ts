@@ -1,5 +1,5 @@
-import type { SquareType } from "@models/types/squareType";
+import type { BaseSquareType } from "@models/types/square";
 
-type InsertSquareApiType = Omit<SquareType, "id">;
+type InsertSquareApiType = BaseSquareType;
 
 export type { InsertSquareApiType };
