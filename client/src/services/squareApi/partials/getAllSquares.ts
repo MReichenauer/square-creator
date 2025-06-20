@@ -1,25 +1,21 @@
 import type { SquareType } from "@models/types/square";
-import type { ErrorResponseType } from "../models/types/errorResponseType";
 
 const baseUrl = import.meta.env.VITE_SQUARE_API_BASE_URL_DEVELOPMENT;
 
-const getAllSquares = async () => {
-	try {
-		const response = await fetch(`${baseUrl}/square`);
-		console.log("res", response);
-		if (!response.ok) {
-			const errorResponse: ErrorResponseType = await response.json();
-			throw new Error(`Function: getAllSquares.Error: ${JSON.stringify(errorResponse, null, 2)}`);
-		}
-		const data: SquareType[] = await response.json();
-		console.log(`Function: getAllSquares. Successful response:`, data);
+export const getAllSquares = async (): Promise<SquareType[]> => {
+	const response = await fetch(`${baseUrl}/square`);
+	if (!response.ok) {
+		const isResponseApplicationJson = response.headers.get("Content-Type")?.includes("application/json") ? true : false;
 
-		return data;
-	} catch (error) {
-		if (error instanceof Error) {
-			return console.error(`Function: getAllSquares encountered an error: ${error.message}`);
-		}
-		console.error(`Function: getAllSquares encountered an unknown instance oferror: ${error}`);
+		const formatedErrorResponseBody = isResponseApplicationJson ? JSON.stringify(await response.json(), null, 2) : null;
+
+		const formatedErrorStatus = `\nStatus text: ${response.statusText} \nStatus code: ${response.status}`;
+
+		const errorDetails = `${formatedErrorStatus} ${
+			formatedErrorResponseBody ? `\nResponse: ${formatedErrorResponseBody}` : ""
+		}`;
+
+		throw new Error(errorDetails);
 	}
+	return await response.json();
 };
-export { getAllSquares };

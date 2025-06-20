@@ -1,7 +1,7 @@
 
 using api.Dtos;
 using api.models;
-using api.repositories;
+using api.repositories.SquareRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.controllers;
@@ -41,6 +41,18 @@ public class SquareController(ISquareRepository squareRepository) : ControllerBa
             return Conflict(new { type = "Conflict", title = "This color is used by previous square", status = 409, errors = new { Color = new[] { exception.Message } } });
 
         }
+    }
+    [HttpGet("test-409")]
+    public ActionResult Test409Error()
+    {
+        ModelState.AddModelError("Test conflict", "Model state test conflict.");
+        return Conflict(new { type = "Conflict", title = "This color is used by previous square", status = 409, errors = ModelState });
+    }
+    [HttpGet("test-400")]
+    public ActionResult Test400Error()
+    {
+        ModelState.AddModelError("Test badRequest", "Model state test badRequest.");
+        return BadRequest(ModelState);
     }
 }
 

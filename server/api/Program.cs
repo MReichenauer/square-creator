@@ -1,9 +1,9 @@
-using api.repositories;
 using Scalar.AspNetCore;
 using api.Services.JsonDataService;
 using api.Services.GenerateSquareIdService;
 using api.Services.ValidateColorService;
 using api.models;
+using api.repositories.SquareRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";

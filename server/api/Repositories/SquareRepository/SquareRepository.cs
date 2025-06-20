@@ -4,7 +4,7 @@ using api.Services.GenerateSquareIdService;
 using api.Services.JsonDataService;
 using api.Services.ValidateColorService;
 
-namespace api.repositories
+namespace api.repositories.SquareRepository
 {
     public class SquareRepository : ISquareRepository
     {
