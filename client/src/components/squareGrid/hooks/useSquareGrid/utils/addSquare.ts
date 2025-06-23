@@ -11,7 +11,7 @@ const addSquare = (storedSquares: BaseSquareType[]) => {
 		...calculateCoordinates(columns, previousSquare),
 		color: generateSquareColor(invalidColors),
 	};
-	return [...storedSquares, newSquare];
+	return newSquare;
 };
 
 export { addSquare };

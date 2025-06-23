@@ -5,10 +5,17 @@ import { use } from "react";
 
 const SquareGame = () => {
 	const initialSquares = use(squareApi.getAll);
-	const { squares, handleAddSquare } = useGridSquare(initialSquares);
+
+	const { squares, isPending, addstuff } = useGridSquare(initialSquares);
+
+	console.log("isPending:", isPending, squares);
+
 	return (
 		<div>
-			<button onClick={handleAddSquare}>Add square</button>
+			<button disabled={isPending} onClick={addstuff}>
+				{isPending ? "Adding…" : "Add square"}
+			</button>
+			<pre>{JSON.stringify(squares)}</pre>
 			<SquareGrid squares={squares} />
 		</div>
 	);
