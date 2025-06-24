@@ -1,31 +1,24 @@
-import type { SquareType } from "@models/types/square";
-import type { InsertSquareApiType } from "../models/types/insertSquareApiType";
-import type { ErrorResponseType } from "../models/types/errorResponseType";
+import type { BaseSquareType, SquareType } from "@models/types/square";
+import { getFormattedErrorResponseDetails } from "../utils/format/error/getFormattedErrorResponseDetails/getFormattedErrorResponseDetails";
 
 const baseUrl = import.meta.env.VITE_SQUARE_API_BASE_URL_DEVELOPMENT;
 
-const insertSquare = async (square: InsertSquareApiType) => {
-	try {
-		const response = await fetch(`${baseUrl}/square`, {
-			method: "POST",
-			body: JSON.stringify(square),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-
-		if (!response.ok) {
-			const errorResponse: ErrorResponseType = await response.json();
-			throw new Error(`Function: insertSquare. Error: ${JSON.stringify(errorResponse, null, 2)}`);
-		}
-
-		const data: SquareType = await response.json();
-		return data;
-	} catch (error) {
-		if (error instanceof Error) {
-			return console.error(`Function: insertSquare encountered an error: ${error.message}`);
-		}
-		console.error(`Function: insertSquare encountered an unknown instance oferror: ${error}`);
+const insertSquare = async (square: BaseSquareType) => {
+	const response = await fetch(`${baseUrl}/square`, {
+		method: "POST",
+		body: JSON.stringify(square),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	console.log("insertSquare response:", response);
+	if (!response.ok) {
+		const errorDetails = await getFormattedErrorResponseDetails(response);
+		throw new Error(errorDetails);
 	}
+
+	const data: SquareType = await response.json();
+	console.log("insertSquare data:", data);
+	return data;
 };
 export { insertSquare };

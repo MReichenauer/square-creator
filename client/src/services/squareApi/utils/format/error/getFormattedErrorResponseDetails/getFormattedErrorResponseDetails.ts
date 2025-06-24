@@ -4,8 +4,11 @@ import { formatErrorResponseDetails } from "./partials/formatErrorResponseDetail
 
 const getFormattedErrorResponseDetails = async (response: Response) => {
 	const header = extractResponseHeaderStatus(response);
+	console.log("header:", header);
 	const body = await extractResponseBody(response);
+	console.log("body:", body);
 	const formattedErrorResponseDetails = formatErrorResponseDetails(header, body);
+	console.log("formattedErrorResponseDetails:", formattedErrorResponseDetails);
 	return formattedErrorResponseDetails;
 };
 

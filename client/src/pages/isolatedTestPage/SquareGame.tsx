@@ -6,13 +6,13 @@ import { use } from "react";
 const SquareGame = () => {
 	const initialSquares = use(squareApi.getAll);
 
-	const { squares, isPending, addstuff } = useGridSquare(initialSquares);
+	const { squares, isPending, addNewSquare } = useGridSquare(initialSquares);
 
 	console.log("isPending:", isPending, squares);
 
 	return (
 		<div>
-			<button disabled={isPending} onClick={addstuff}>
+			<button disabled={isPending} onClick={addNewSquare}>
 				{isPending ? "Adding…" : "Add square"}
 			</button>
 			<pre>{JSON.stringify(squares)}</pre>

@@ -1,9 +1,4 @@
 const generateRandomHexCode = () => {
-	return (
-		"#" +
-		Math.floor(Math.random() * 16777215)
-			.toString(16)
-			.toLocaleLowerCase()
-	);
+	return `#${Math.random().toString(16).slice(2, 8).padEnd(6, "0")}`;
 };
 export { generateRandomHexCode };

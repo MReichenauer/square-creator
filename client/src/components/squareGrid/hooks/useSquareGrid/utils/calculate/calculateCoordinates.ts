@@ -1,8 +1,8 @@
 import type { CoordinatesType } from "../../types/coordinatesType";
 import { calculateDirection } from "./calculateDirection";
 
-const calculateCoordinates = (columns: number, prevCoordinates: CoordinatesType = { x: 0, y: 0 }) => {
-	const coordinates = { ...prevCoordinates };
+const calculateCoordinates = (columns: number, prevCoordinates: CoordinatesType | null) => {
+	const coordinates = { x: 0, y: 0, ...prevCoordinates };
 	switch (calculateDirection(columns, coordinates)) {
 		case "initial":
 			break;

@@ -1,6 +1,7 @@
 const isContentTypeApplicationJson = (response: Response) => {
-	const contentType = response.headers.get("Content-Type");
-	return contentType ? contentType.includes("application/json") : false;
+	console.log("contentType:", response.headers.get("Content-Type"));
+	const contentType = response.headers.get("Content-Type")?.toLowerCase();
+	return contentType ? contentType.includes("json") : false;
 };
 
 export { isContentTypeApplicationJson };

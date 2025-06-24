@@ -1,34 +1,29 @@
 import type { BaseSquareType } from "@models/types/square";
 import { useState, useTransition } from "react";
-import { addSquare } from "./utils/addSquare";
+import { createNewSquare } from "./utils/createNewSquare";
+import { squareApi } from "@services/squareApi/squareApi";
 
 const useGridSquare = (storedSquares: BaseSquareType[] = []) => {
 	const [squares, setSquares] = useState<BaseSquareType[]>(storedSquares);
 	const [isPending, startTransition] = useTransition();
 
-	const addstuff = () => {
-		const newSquare = addSquare(squares);
-		setSquares((prev) => [...prev, newSquare]);
+	const addNewSquare = () => {
+		const previousSquare = squares.length > 0 ? squares[squares.length - 1] : null;
+		const square = createNewSquare(squares.length, previousSquare);
+		setSquares((prev) => [...prev, square]);
 
 		startTransition(async () => {
 			try {
-				const apiSquare = newSquare;
-				await apiAddSquare(apiSquare);
+				await squareApi.insert(square);
 			} catch (error) {
 				setSquares((prev) => prev.slice(0, -1));
-				console.error("Error adding square:", error);
+				throw error;
 			}
 		});
 	};
 
-	const apiAddSquare = async (newSquare: BaseSquareType) => {
-		console.log("apiAddSquare");
-		await new Promise((resolve) => setTimeout(resolve, 1500));
-		console.log("Square added api:", newSquare);
-	};
-
 	return {
-		addstuff,
+		addNewSquare,
 		squares,
 		isPending,
 	};

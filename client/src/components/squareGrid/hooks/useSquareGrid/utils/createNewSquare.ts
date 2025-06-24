@@ -3,10 +3,9 @@ import type { BaseSquareType } from "@models/types/square";
 import { forbiddenHexCodes } from "./colors/forbiddenHexCodes";
 import { generateSquareColor } from "./colors/generateSquareColor";
 
-const addSquare = (storedSquares: BaseSquareType[]) => {
-	const columns = Math.sqrt(storedSquares.length);
-	const invalidColors = forbiddenHexCodes(storedSquares);
-	const previousSquare = storedSquares[storedSquares.length - 1];
+const createNewSquare = (amountOfStoredSquares: number, previousSquare: BaseSquareType | null) => {
+	const columns = Math.sqrt(amountOfStoredSquares);
+	const invalidColors = forbiddenHexCodes(previousSquare ? previousSquare.color : null);
 	const newSquare = {
 		...calculateCoordinates(columns, previousSquare),
 		color: generateSquareColor(invalidColors),
@@ -14,4 +13,4 @@ const addSquare = (storedSquares: BaseSquareType[]) => {
 	return newSquare;
 };
 
-export { addSquare };
+export { createNewSquare };
