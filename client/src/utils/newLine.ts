@@ -1,4 +1,4 @@
-const newLine = (string: string, label?: string) => {
-	return `\n${label ? `${label}:` : ""} ${string}`;
+const newLine = (content: string, label?: string) => {
+	return `\n${label ? `${label}:` : ""} ${content}`;
 };
 export { newLine };
