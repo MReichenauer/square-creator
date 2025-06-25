@@ -1,5 +1,5 @@
 import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
-import { SquareGrid } from "@components/squareGrid/SquareGrid";
+import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGrid";
 import { squareApi } from "@services/squareApi/squareApi";
 import { use } from "react";
 
