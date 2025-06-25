@@ -1,19 +1,17 @@
-import { useGridSquare } from "@components/squareGrid/hooks/useSquareGrid/useSquareGrid";
+import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
 import { SquareGrid } from "@components/squareGrid/SquareGrid";
 import { squareApi } from "@services/squareApi/squareApi";
 import { use } from "react";
 
 const SquareGame = () => {
 	const initialSquares = use(squareApi.getAll);
-
-	const { squares, isPending, addNewSquare } = useGridSquare(initialSquares);
-
-	console.log("isPending:", isPending, squares);
+	const { squares, actions } = useSquareStore(initialSquares);
+	const { addSquare, isAddingSquare } = actions.addSquareAction;
 
 	return (
 		<div>
-			<button disabled={isPending} onClick={addNewSquare}>
-				{isPending ? "Adding…" : "Add square"}
+			<button disabled={isAddingSquare} onClick={addSquare}>
+				{isAddingSquare ? "Adding…" : "Add square"}
 			</button>
 			<pre>{JSON.stringify(squares)}</pre>
 			<SquareGrid squares={squares} />

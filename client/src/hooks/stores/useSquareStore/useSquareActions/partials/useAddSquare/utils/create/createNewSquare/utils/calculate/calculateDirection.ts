@@ -1,4 +1,4 @@
-import type { CoordinatesType } from "../../types/coordinatesType";
+import type { CoordinatesType } from "@hooks/stores/useSquareStore/useSquareActions/partials/useAddSquare/utils/create/createNewSquare/utils/calculate/types/coordinatesType";
 
 const calculateDirection = (columns: number, { x, y }: CoordinatesType) => {
 	if (x === 0) return "right";

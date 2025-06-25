@@ -1,7 +1,7 @@
-import { calculateCoordinates } from "./calculate/calculateCoordinates";
 import type { BaseSquareType } from "@models/types/square";
-import { forbiddenHexCodes } from "./colors/forbiddenHexCodes";
-import { generateSquareColor } from "./colors/generateSquareColor";
+import { forbiddenHexCodes } from "./utils/colors/forbiddenHexCodes";
+import { calculateCoordinates } from "./utils/calculate/calculateCoordinates";
+import { generateSquareColor } from "./utils/colors/generateSquareColor";
 
 const createNewSquare = (amountOfStoredSquares: number, previousSquare: BaseSquareType | null) => {
 	const columns = Math.sqrt(amountOfStoredSquares);
