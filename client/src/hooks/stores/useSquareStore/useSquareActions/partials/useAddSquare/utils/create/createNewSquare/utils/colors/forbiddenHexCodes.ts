@@ -1,8 +1,6 @@
-import type { BaseSquareType } from "@models/types/square";
-
-const forbiddenHexCodes = (storedSquares: BaseSquareType[] | []) => {
+const forbiddenHexCodes = (previousSquareColor: string | null) => {
 	return [
-		storedSquares[storedSquares?.length - 1]?.color,
+		previousSquareColor ? previousSquareColor : "",
 		getComputedStyle(document.documentElement).getPropertyValue("--primary-background-color-light"),
 		getComputedStyle(document.documentElement).getPropertyValue("--primary-background-color-dark"),
 	];

@@ -2,7 +2,7 @@
 using api.Dtos;
 using api.models;
 
-namespace api.repositories
+namespace api.repositories.SquareRepository
 {
     public interface ISquareRepository
     {

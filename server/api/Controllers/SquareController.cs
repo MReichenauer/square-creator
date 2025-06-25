@@ -1,7 +1,7 @@
 
 using api.Dtos;
 using api.models;
-using api.repositories;
+using api.repositories.SquareRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.controllers;
@@ -42,5 +42,6 @@ public class SquareController(ISquareRepository squareRepository) : ControllerBa
 
         }
     }
+
 }
 

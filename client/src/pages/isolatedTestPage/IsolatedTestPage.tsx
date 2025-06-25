@@ -1,13 +1,16 @@
-import { useGridSquare } from "@components/squareGrid/hooks/useSquareGrid/useSquareGrid";
-import { SquareGrid } from "@components/squareGrid/SquareGrid";
+import { Suspense } from "react";
+import { SquareGame } from "../../components/squareGame/SquareGame.tsx";
+import { ErrorBoundary } from "@components/errorBoundary/ErrorBoundary.tsx";
 
 const IsolatedTestPage = () => {
-	const { squares, handleAddSquare } = useGridSquare([]);
-
 	return (
 		<div>
-			<button onClick={handleAddSquare}>Add square</button>
-			<SquareGrid squares={squares} />
+			<h1>Square creator</h1>
+			<ErrorBoundary fallback={"An error occurred while loading the game."}>
+				<Suspense fallback={<p>Loading...</p>}>
+					<SquareGame />
+				</Suspense>
+			</ErrorBoundary>
 		</div>
 	);
 };
