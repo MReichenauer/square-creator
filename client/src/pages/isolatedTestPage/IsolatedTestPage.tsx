@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { ErrorBoundary } from "./ErrorBoundary";
 import { SquareGame } from "./SquareGame.tsx";
+import { ErrorBoundary } from "@components/errorBoundary/ErrorBoundary.tsx";
 
 const IsolatedTestPage = () => {
 	return (
