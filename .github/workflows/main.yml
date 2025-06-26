@@ -14,7 +14,7 @@ env:
   DOTNET_VERSION: "9.x"
   SOLUTION_PATH: "./server/server.sln"
   API_PROJECT_PATH: "./server/api/api.csproj"
-  PUBLISH_DIR: "./server/api/publish"
+  PUBLISH_DIR: "./publish"
 
 jobs:
   build-and-test:
