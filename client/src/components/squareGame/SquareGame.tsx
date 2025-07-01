@@ -1,10 +1,14 @@
 import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
 import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGrid";
-import { squareApi } from "@services/squareApi/squareApi";
 import { use } from "react";
+import type { SquareType } from "@models/types/square";
 
-const SquareGame = () => {
-	const initialSquares = use(squareApi.getAll);
+type SquareGameProps = {
+	squaresPromise: Promise<SquareType[]>;
+};
+
+const SquareGame = ({ squaresPromise }: SquareGameProps) => {
+	const initialSquares = use(squaresPromise);
 	const { squares, actions } = useSquareStore(initialSquares);
 	const { addSquare, isAddingSquare } = actions.addSquareAction;
 
@@ -13,7 +17,6 @@ const SquareGame = () => {
 			<button disabled={isAddingSquare} onClick={addSquare}>
 				{isAddingSquare ? "Adding…" : "Add square"}
 			</button>
-			<pre>{JSON.stringify(squares)}</pre>
 			<SquareGrid squares={squares} />
 		</div>
 	);
