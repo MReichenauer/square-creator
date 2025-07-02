@@ -5,6 +5,6 @@ namespace api.Services.SignalRService.utils.BroadcastQueue
 {
     public interface IBroadcastQueue
     {
-        Task NotifyQueuePositionAsync(IHubCallerClients clients, string[] connectionIds);
+        Task NotifyQueuePosition(IHubCallerClients clients, string[] connectionIds);
     }
 };
