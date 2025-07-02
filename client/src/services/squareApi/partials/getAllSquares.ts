@@ -4,7 +4,7 @@ import { getFormattedErrorResponseDetails } from "../utils/format/error/getForma
 
 const baseUrl = import.meta.env.VITE_SQUARE_API_BASE_URL_DEVELOPMENT;
 
-export const getAllSquares = async () => {
+const getAllSquares = async () => {
 	const response = await fetch(`${baseUrl}/square`);
 	if (!response.ok) {
 		const errorDetails = await getFormattedErrorResponseDetails(response);
@@ -13,3 +13,5 @@ export const getAllSquares = async () => {
 	const data: SquareType[] = await response.json();
 	return data;
 };
+
+export { getAllSquares };

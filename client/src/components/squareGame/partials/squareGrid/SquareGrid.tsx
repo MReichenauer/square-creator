@@ -1,4 +1,4 @@
-import { Square } from "@components/square/Square";
+import { Square } from "@components/squareGame/partials/square/Square";
 import { Grid } from "@components/ui/grid/Grid";
 import type { BaseSquareType } from "@models/types/square";
 
