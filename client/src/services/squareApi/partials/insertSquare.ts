@@ -11,14 +11,12 @@ const insertSquare = async (square: BaseSquareType) => {
 			"Content-Type": "application/json",
 		},
 	});
-	console.log("insertSquare response:", response);
 	if (!response.ok) {
 		const errorDetails = await getFormattedErrorResponseDetails(response);
 		throw new Error(errorDetails);
 	}
 
 	const data: SquareType = await response.json();
-	console.log("insertSquare data:", data);
 	return data;
 };
 export { insertSquare };

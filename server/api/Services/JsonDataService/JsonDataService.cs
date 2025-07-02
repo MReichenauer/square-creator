@@ -36,7 +36,6 @@ public class JsonDataService : IJsonDataService
         storedArrayData.Add(obj);
         string updatedArrayData = JsonSerializer.Serialize(storedArrayData, _options);
         File.WriteAllText(filePath, updatedArrayData);
-        Console.WriteLine(updatedArrayData);
     }
 
     public void OweriteObject<T>(string filePath, T obj)
