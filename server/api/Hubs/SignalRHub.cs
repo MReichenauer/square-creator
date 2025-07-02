@@ -11,21 +11,21 @@ namespace api.Hubs
         public async Task EnterQueue()
         {
             signalRService.Enqueue(Context.ConnectionId);
-            await broadcastQueue.NotifyQueuePositionAsync(Clients, signalRService.QueueSnapshot());
+            await broadcastQueue.NotifyQueuePosition(Clients, signalRService.QueueSnapshot());
         }
 
 
         public async Task LeaveQueue()
         {
             signalRService.Dequeue(Context.ConnectionId);
-            await broadcastQueue.NotifyQueuePositionAsync(Clients, signalRService.QueueSnapshot());
+            await broadcastQueue.NotifyQueuePosition(Clients, signalRService.QueueSnapshot());
         }
 
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             signalRService.Dequeue(Context.ConnectionId);
-            await broadcastQueue.NotifyQueuePositionAsync(Clients, signalRService.QueueSnapshot());
+            await broadcastQueue.NotifyQueuePosition(Clients, signalRService.QueueSnapshot());
             await base.OnDisconnectedAsync(exception);
         }
     }
