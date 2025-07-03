@@ -1,11 +1,10 @@
 import type { SquareType } from "@models/types/square";
 
 import { getFormattedErrorResponseDetails } from "../utils/format/error/getFormattedErrorResponseDetails/getFormattedErrorResponseDetails";
-
-const baseUrl = import.meta.env.VITE_SQUARE_API_BASE_URL_DEVELOPMENT;
+import { apiBaseUrl } from "@services/squareApi/utils/url/apiBaseUrl";
 
 const getAllSquares = async () => {
-	const response = await fetch(`${baseUrl}/square`);
+	const response = await fetch(`${apiBaseUrl}/square`);
 	if (!response.ok) {
 		const errorDetails = await getFormattedErrorResponseDetails(response);
 		throw new Error(errorDetails);

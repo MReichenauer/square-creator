@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173")
+                          policy.WithOrigins("https://proud-field-04faaa603.2.azurestaticapps.net")
                           .WithMethods("GET", "POST")
                           .AllowAnyHeader()
                           .AllowCredentials();
