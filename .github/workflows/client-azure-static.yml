@@ -39,4 +39,5 @@ jobs:
           action: 'upload'
           app_location: 'client'
           output_location: 'dist'
+          skip_app_build: true
           app_artifact_location: 'client/dist'
