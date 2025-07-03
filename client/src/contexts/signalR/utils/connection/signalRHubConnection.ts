@@ -1,8 +1,8 @@
 import { HubConnectionBuilder } from "@microsoft/signalr";
-const baseUrl = import.meta.env.VITE_SQUARE_API_BASE_URL_DEVELOPMENT;
+import { apiBaseUrl } from "@services/squareApi/utils/url/apiBaseUrl";
 
 const signalRHubConnection = new HubConnectionBuilder()
-	.withUrl(`${baseUrl}/signal-r-hub`)
+	.withUrl(`${apiBaseUrl}/signal-r-hub`)
 	.withAutomaticReconnect()
 	.build();
 
