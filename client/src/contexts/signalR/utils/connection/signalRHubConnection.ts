@@ -5,5 +5,5 @@ const signalRHubConnection = new HubConnectionBuilder()
 	.withUrl(`${apiBaseUrl}/signal-r-hub`)
 	.withAutomaticReconnect()
 	.build();
-
+console.log("signalRHubConnection base url", apiBaseUrl);
 export { signalRHubConnection };
