@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { Navigation } from "@layout/header/partials/navigationBar/Navigation";
+import NavigationDropDown from "./navigationDropDown/NavigationDropDown";
 
 const Header = () => {
 	return (
@@ -9,7 +10,8 @@ const Header = () => {
 				<Link to={"/"}>
 					<h3>Square Creator</h3>
 				</Link>
-				<Navigation />
+				{/* <Navigation /> */}
+				<NavigationDropDown />
 			</div>
 		</header>
 	);
