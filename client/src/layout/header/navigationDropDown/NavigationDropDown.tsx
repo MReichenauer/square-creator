@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./NavigationDropDown.module.css";
-import { Link, useLocation } from "react-router-dom";
-
+import { NavLink, useLocation } from "react-router-dom";
+import { useHandleClickOutsideEvent } from "@hooks/utils/events/useHandleClickOutsideEvent";
 const NavigationDropDown = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
@@ -11,16 +11,7 @@ const NavigationDropDown = () => {
 		setIsOpen(false);
 	}, [location]);
 
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (event.target instanceof Node && navRef.current && !navRef.current.contains(event.target)) {
-				setIsOpen(false);
-			}
-		};
-
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, []);
+	useHandleClickOutsideEvent(navRef, () => setIsOpen(false));
 
 	return (
 		<nav ref={navRef} className={styles.navigation}>
@@ -35,10 +26,10 @@ const NavigationDropDown = () => {
 			{isOpen && (
 				<ul id="Main Menu" className={styles.dropDownOptions}>
 					<li>
-						<Link to={"/"}>Home</Link>
+						<NavLink to={"/"}>Home</NavLink>
 					</li>
 					<li>
-						<Link to={"/square-game"}>Square Game</Link>
+						<NavLink to={"/square-game"}>Square Game</NavLink>
 					</li>
 				</ul>
 			)}

@@ -1,9 +1,0 @@
-.navigation {
-	margin-left: auto;
-}
-
-.navigation > ul {
-	list-style-type: none;
-	gap: 1.5rem;
-	display: flex;
-}
