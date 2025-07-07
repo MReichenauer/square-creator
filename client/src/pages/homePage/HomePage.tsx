@@ -1,5 +1,5 @@
 const HomePage = () => {
-	return <h1>Home Page V2</h1>;
+	return <h2>Home Page V2</h2>;
 };
 
 export { HomePage };

@@ -1,0 +1,12 @@
+.clientQueue {
+	display: flex;
+	margin-top: 5rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.clientQueue h3 {
+	margin-bottom: var(--spacing-4);
+}

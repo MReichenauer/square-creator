@@ -4,7 +4,7 @@
 	gap: var(--spacing-3);
 }
 
-.logo h2 {
+.logo h1 {
 	color: var(--primary-color);
 }
 
@@ -29,4 +29,21 @@
 }
 .squareContainer div:nth-child(5) {
 	background-color: var(--dark-cyan);
+}
+
+.logo {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+@media (max-width: 510px) {
+	.logo h1 {
+		font-size: var(--font-size-3xl);
+	}
+}
+
+@media (min-width: 511px) and (max-width: 768px) {
+	.logo h1 {
+		font-size: var(--font-size-4xl);
+	}
 }

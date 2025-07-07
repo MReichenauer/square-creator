@@ -3,8 +3,8 @@ import NavigationDropDown from "../navigationDropDown/NavigationDropDown";
 import { NavigationBar } from "../partials/navigationBar/NavigationBar";
 
 const Navigation = () => {
-	const { xs } = useCheckBreakpoints();
-	return <>{xs ? <NavigationDropDown /> : <NavigationBar />}</>;
+	const { xs, sm } = useCheckBreakpoints();
+	return <>{xs || sm ? <NavigationDropDown /> : <NavigationBar />}</>;
 };
 
 export default Navigation;

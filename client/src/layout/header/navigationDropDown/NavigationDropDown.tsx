@@ -14,12 +14,13 @@ const NavigationDropDown = () => {
 	useHandleClickOutsideEvent(navRef, () => setIsOpen(false));
 
 	return (
-		<nav ref={navRef} className={styles.navigation}>
+		<nav id="naven" ref={navRef} className={styles.navigation}>
 			<button
 				className={styles.toggleDropDown}
 				onClick={() => setIsOpen((prev) => !prev)}
 				aria-expanded={isOpen}
-				aria-controls="Main Menu"
+				aria-controls="Main menu"
+				aria-label="Toggle main menu"
 			>
 				&#8801;
 			</button>

@@ -1,5 +1,6 @@
 xs: 320px - 480px
-s: 481px - 768px
-m: 769px - 1024px
-l: 1025px - 1439px
-xl: > 1440px
+sm: 481px - 697px
+md: 698px - 768px
+lg: 769px - 1024px
+xl: 1025px - 1439px
+xxl: > 1440px
