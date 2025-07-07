@@ -3,6 +3,7 @@ import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGri
 import { use } from "react";
 import type { SquareType } from "@models/types/square";
 import styles from "./SquareGame.module.css";
+import Button from "@components/ui/button/Button";
 type SquareGameProps = {
 	squaresPromise: Promise<SquareType[]>;
 };
@@ -14,9 +15,7 @@ const SquareGame = ({ squaresPromise }: SquareGameProps) => {
 
 	return (
 		<div className={styles.container}>
-			<button disabled={isAddingSquare} onClick={addSquare}>
-				{isAddingSquare ? "Adding…" : "Add square"}
-			</button>
+			<Button variant="primary" label="Add square" disabled={isAddingSquare} onClick={addSquare} />
 			<SquareGrid squares={squares} />
 		</div>
 	);
