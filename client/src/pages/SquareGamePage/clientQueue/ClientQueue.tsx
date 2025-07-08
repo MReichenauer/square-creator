@@ -8,7 +8,7 @@ const ClientQueue = () => {
 		<section className={styles.clientQueue}>
 			<h3>You have been placed in queue</h3>
 			<p>Once it is your turn, the game will start automatically.</p>
-			<p>You are currently at position: {signalRContext.positionInQueue}</p>
+			<p>You're current position in the queue is: {signalRContext.positionInQueue}.</p>
 		</section>
 	);
 };

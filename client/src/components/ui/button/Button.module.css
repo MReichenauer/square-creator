@@ -9,6 +9,7 @@
 	font-family: var(--font-family-base);
 	font-weight: var(--font-weight-medium);
 	color: var(--dark-grey);
+	transition: all 0.3s ease;
 	&:hover {
 		color: var(--black);
 		border-color: var(--black);
@@ -34,5 +35,17 @@
 		background-color: transparent;
 		color: var(--primary-color);
 		border-color: var(--primary-color);
+	}
+}
+
+.secondary {
+	composes: default;
+	background-color: var(--secondary-color);
+	color: var(--primary-text-color-light);
+	border: 1px solid var(--secondary-color);
+	&:hover {
+		background-color: transparent;
+		color: var(--secondary-color);
+		border-color: var(--secondary-color);
 	}
 }

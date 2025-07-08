@@ -15,6 +15,7 @@ const SquareGame = ({ squaresPromise }: SquareGameProps) => {
 
 	return (
 		<div className={styles.container}>
+			<p>Press the button below to add a new square to the board.</p>
 			<Button variant="primary" label="Add square" disabled={isAddingSquare} onClick={addSquare} />
 			<SquareGrid squares={squares} />
 		</div>

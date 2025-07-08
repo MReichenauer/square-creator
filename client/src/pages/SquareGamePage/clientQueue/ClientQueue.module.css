@@ -1,6 +1,6 @@
 .clientQueue {
 	display: flex;
-	margin-top: 5rem;
+	margin-top: var(--spacing-4);
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
