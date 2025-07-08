@@ -5,11 +5,10 @@ import styles from "./ClientQueue.module.css";
 const ClientQueue = () => {
 	const signalRContext = use(SignalRContext);
 	return (
-		<section className={styles.clientQueue}>
-			<h3>You have been placed in queue</h3>
+		<div className={styles.clientQueue}>
 			<p>Once it is your turn, the game will start automatically.</p>
 			<p>You're current position in the queue is: {signalRContext.positionInQueue}.</p>
-		</section>
+		</div>
 	);
 };
 

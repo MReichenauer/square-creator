@@ -7,6 +7,6 @@
 	gap: var(--spacing-2);
 }
 
-.clientQueue h3 {
-	margin-bottom: var(--spacing-4);
+.clientQueue p:not(:first-of-type) {
+	color: var(--secondary-color);
 }

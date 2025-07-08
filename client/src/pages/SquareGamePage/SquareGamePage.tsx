@@ -24,15 +24,18 @@ const SquareGamePage = () => {
 
 	return (
 		<section className={styles.container}>
-			<h2>Square Game</h2>
 			{squaresPromise ? (
 				<ErrorBoundary fallback={"An error occurred while loading the game."}>
+					<h2>Square Game</h2>
 					<Suspense fallback={<p>Loading...</p>}>
 						<SquareGame squaresPromise={squaresPromise} />
 					</Suspense>
 				</ErrorBoundary>
 			) : (
-				<ClientQueue />
+				<>
+					<h2>You have been placed in queue</h2>
+					<ClientQueue />
+				</>
 			)}
 		</section>
 	);
