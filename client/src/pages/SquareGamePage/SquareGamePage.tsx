@@ -1,25 +1,18 @@
 import { ErrorBoundary } from "@components/errorBoundary/ErrorBoundary";
 import { SquareGame } from "@components/squareGame/SquareGame";
-import { SignalRContext } from "@contexts/signalR/SignalRContext";
 import type { SquareType } from "@models/types/square";
 import { squareApi } from "@services/squareApi/squareApi";
-import { Suspense, use, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import ClientQueue from "./clientQueue/ClientQueue";
 import styles from "./SquareGamePage.module.css";
+import { useSignalR } from "@services/signalR/hooks/useSignalR";
+
 const SquareGamePage = () => {
 	const [squaresPromise, setSquaresPromise] = useState<Promise<SquareType[]> | null>(null);
-	const signalRContext = use(SignalRContext);
+	const { positionInQueue, isAllowedToEnterGame } = useSignalR();
 
-	useEffect(() => {
-		if (signalRContext.isAllowedToEnterGame) {
-			setSquaresPromise(squareApi.getAll());
-		} else {
-			setSquaresPromise(null);
-		}
-	}, [signalRContext.isAllowedToEnterGame]);
-
-	if (!signalRContext) {
-		return <p>SignalR context failed to initiate</p>;
+	if (isAllowedToEnterGame && squaresPromise === null) {
+		setSquaresPromise(squareApi.getAll());
 	}
 
 	return (
@@ -34,7 +27,7 @@ const SquareGamePage = () => {
 			) : (
 				<>
 					<h2>You have been placed in queue</h2>
-					<ClientQueue />
+					<ClientQueue positionInQueue={positionInQueue} />
 				</>
 			)}
 		</section>

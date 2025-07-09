@@ -5,7 +5,7 @@ const HomePage = () => {
 		<section className={styles.section}>
 			<h2>Home</h2>
 			<p>Welcome to Square Creator. This project is the result of my attempt to tackle Wizardworks code challenge.</p>
-			<h3>Summary of the requirements for the challenge</h3>
+			<h3>Summary of Wizardworks challenge</h3>
 			<h4>Functional requirements</h4>
 			<p>
 				The goal of the challenge is to create a website where players can create potentionaly an endless amount of
@@ -20,12 +20,12 @@ const HomePage = () => {
 			<ul>
 				<li>
 					<a target="_blank" href="https://github.com/MReichenauer/square-creator">
-						Github repository for my attempt.
+						My Github repository for the challenge.
 					</a>
 				</li>
 				<li>
 					<a target="_blank" href="https://github.com/Wizardworks-AB/programmeringsuppgift/tree/master">
-						Github repository for Wizardworks code challenge.
+						Wizardworks Github repository describing the challenge.
 					</a>
 				</li>
 			</ul>
