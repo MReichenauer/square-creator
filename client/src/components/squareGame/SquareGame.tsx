@@ -16,7 +16,7 @@ const SquareGame = ({ squaresPromise }: SquareGameProps) => {
 	const initialSquares = use(squaresPromise);
 	const { squares, actions } = useSquareStore(initialSquares);
 	const { addSquare, isAddingSquare } = actions.addSquareAction;
-	const { isActive, handleUserActivity } = useIsUserActive(10000);
+	const { isActive, handleUserActivity } = useIsUserActive(5000);
 	const throttleHandleUserActivity = useThrottleCallback(handleUserActivity, 1000);
 	useHandleUserInteractionEvents(throttleHandleUserActivity);
 	const navigate = useNavigate();

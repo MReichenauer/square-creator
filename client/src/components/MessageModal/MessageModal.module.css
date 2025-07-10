@@ -1,0 +1,29 @@
+dialog:not([open]) {
+	display: none;
+}
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	padding-inline: 1rem;
+	padding-block: 0.5rem;
+	margin-inline: auto;
+	margin-top: 25dvh;
+	border-radius: 0.25rem;
+	border: 1px solid var(--primary-color);
+	& h2 {
+		color: var(--secondary-color);
+		padding-bottom: 1.25rem;
+	}
+	& button {
+		margin-top: 2.5rem;
+		margin-bottom: 0.25rem;
+		margin-inline: auto;
+	}
+}
+
+.modal::backdrop {
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(8px) brightness(1.2);
+	-webkit-backdrop-filter: blur(8px) brightness(1.2);
+}
