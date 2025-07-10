@@ -1,9 +1,29 @@
+import { useSearchParams } from "react-router-dom";
 import styles from "./HomePage.module.css";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [showUserInactiveModal, setShowUserInactiveModal] = useState(false);
+
+	useEffect(() => {
+		const sessionExpired = searchParams.get("sessionExpired") === "true";
+		if (sessionExpired) {
+			const newSearchParams = new URLSearchParams(searchParams);
+			newSearchParams.delete("sessionExpired");
+			setSearchParams(newSearchParams, { replace: true });
+			setShowUserInactiveModal(true);
+		}
+	}, [searchParams, setSearchParams]);
+
 	return (
 		<section className={styles.section}>
 			<h2>Home</h2>
+
+			<dialog open={showUserInactiveModal} onClose={() => setShowUserInactiveModal(false)}>
+				Your session has expired.{" "}
+			</dialog>
+
 			<p>Welcome to Square Creator. This project is the result of my attempt to tackle Wizardworks code challenge.</p>
 			<h3>Summary of Wizardworks challenge</h3>
 			<h4>Functional requirements</h4>
