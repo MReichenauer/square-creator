@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styles from "./MessageModal.module.css";
-import Button from "@components/ui/button/Button";
+import { Button } from "@components/ui/button/Button";
 
 type MessageModalProps = {
 	isOpen: boolean;

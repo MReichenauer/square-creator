@@ -1,13 +1,15 @@
-import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
-import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGrid";
-import { use, useEffect } from "react";
-import type { SquareType } from "@models/types/square";
 import styles from "./SquareGame.module.css";
-import Button from "@components/ui/button/Button";
+import { use } from "react";
+import type { SquareType } from "@models/types/square";
+import { Button } from "@components/ui/button/Button";
+import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGrid";
+import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
 import { useThrottleCallback } from "@hooks/utils/throttle/useThrottleCallback";
 import { useIsUserActive } from "@hooks/utils/useIsUserActive/useIsUserActive";
 import { useHandleUserInteractionEvents } from "@hooks/utils/events/useHandleUserInteractionEvents";
-import { useNavigate } from "react-router-dom";
+import { useRedirectInactiveUser } from "@hooks/utils/useRedirectInactiveUser/useRedirectInactiveUser";
+import { minuteToMillisecond } from "@utils/calculate/minuteToMillisecond";
+
 type SquareGameProps = {
 	squaresPromise: Promise<SquareType[]>;
 };
@@ -16,19 +18,10 @@ const SquareGame = ({ squaresPromise }: SquareGameProps) => {
 	const initialSquares = use(squaresPromise);
 	const { squares, actions } = useSquareStore(initialSquares);
 	const { addSquare, isAddingSquare } = actions.addSquareAction;
-	const { isActive, handleUserActivity } = useIsUserActive(5000);
+	const { isActive, handleUserActivity } = useIsUserActive(minuteToMillisecond(5));
 	const throttleHandleUserActivity = useThrottleCallback(handleUserActivity, 1000);
 	useHandleUserInteractionEvents(throttleHandleUserActivity);
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (isActive === false) {
-			navigate({
-				pathname: "/",
-				search: "?sessionExpired=true",
-			});
-		}
-	}, [isActive, navigate]);
+	useRedirectInactiveUser(isActive);
 
 	return (
 		<div className={styles.container}>
