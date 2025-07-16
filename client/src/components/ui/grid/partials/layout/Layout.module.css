@@ -1,7 +1,8 @@
 .gridLayout {
 	display: grid;
-	width: fit-content;
-	height: fit-content;
+	max-width: 90dvw;
+	overflow: auto;
+	max-height: 90dvh;
 	gap: var(--spacing-2);
 	grid-template-columns: repeat(auto-fill, min-content);
 	grid-template-rows: repeat(auto-fill, min-content);

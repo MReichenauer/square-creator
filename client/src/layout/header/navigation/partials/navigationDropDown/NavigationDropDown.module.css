@@ -1,0 +1,30 @@
+.navigation {
+	margin-left: auto;
+	backdrop-filter: blur(8px) brightness(1.2);
+	-webkit-backdrop-filter: blur(8px) brightness(1.2);
+}
+.dropDownOptions {
+	position: absolute;
+	padding-block: var(--spacing-4);
+	list-style: none;
+	padding-inline: var(--spacing-4);
+	min-width: max-content;
+	top: 2.15rem;
+	right: -1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+	backdrop-filter: blur(8px) brightness(1.2);
+	-webkit-backdrop-filter: blur(8px) brightness(1.2);
+	border-bottom-left-radius: var(--border-radius-1);
+}
+
+.toggleDropDown {
+	color: var(--primary-color);
+	height: 1rem;
+	aspect-ratio: 1;
+	padding-bottom: var(--spacing-1);
+	scale: 2.2;
+	background-color: transparent;
+	border: none;
+}

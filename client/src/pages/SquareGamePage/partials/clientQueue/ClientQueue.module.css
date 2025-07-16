@@ -1,0 +1,12 @@
+.clientQueue {
+	display: flex;
+	margin-top: var(--spacing-4);
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.clientQueue p:not(:first-of-type) {
+	color: var(--secondary-color);
+}
