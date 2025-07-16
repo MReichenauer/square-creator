@@ -26,13 +26,13 @@ body {
 h1 {
 	font-size: var(--font-size-5xl);
 	font-family: var(--font-family-heading);
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-medium);
 }
 
 h2 {
 	font-size: var(--font-size-4xl);
 	font-family: var(--font-family-heading);
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-medium);
 }
 
 h3 {
@@ -61,6 +61,10 @@ p {
 a {
 	font-size: var(--font-size-md);
 	font-weight: var(--font-weight-regular);
+}
+
+button,
+a {
 	cursor: pointer;
 }
 

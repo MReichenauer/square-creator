@@ -15,7 +15,8 @@
       "@models/*": ["models/*"],
       "@pages/*": ["pages/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@layout/*": ["layout/*"]
     },
 
     /* Bundler mode */

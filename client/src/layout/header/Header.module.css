@@ -1,0 +1,29 @@
+.header {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: fit-content;
+	padding-block: var(--spacing-2);
+	padding-inline: var(--spacing-6);
+	backdrop-filter: blur(8px) brightness(1.2);
+	-webkit-backdrop-filter: blur(8px) brightness(1.2);
+}
+.header a {
+	color: inherit;
+	text-decoration: none;
+	&:hover,
+	&:focus-visible {
+		text-decoration: underline;
+		color: var(--primary-color);
+	}
+	&[aria-current]:not([aria-current="false"]) {
+		color: var(--secondary-color);
+	}
+}
+
+.contentContainer {
+	align-items: center;
+	margin-inline: auto;
+	max-width: 1250px;
+	display: flex;
+}

@@ -1,7 +1,14 @@
-import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
-import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGrid";
+import styles from "./SquareGame.module.css";
 import { use } from "react";
 import type { SquareType } from "@models/types/square";
+import { Button } from "@components/ui/button/Button";
+import { SquareGrid } from "@components/squareGame/partials/squareGrid/SquareGrid";
+import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
+import { useThrottleCallback } from "@hooks/utils/throttle/useThrottleCallback";
+import { useIsUserActive } from "@hooks/utils/useIsUserActive/useIsUserActive";
+import { useHandleUserInteractionEvents } from "@hooks/utils/events/useHandleUserInteractionEvents";
+import { useRedirectInactiveUser } from "@hooks/utils/useRedirectInactiveUser/useRedirectInactiveUser";
+import { minuteToMillisecond } from "@utils/calculate/minuteToMillisecond";
 
 type SquareGameProps = {
 	squaresPromise: Promise<SquareType[]>;
@@ -11,12 +18,16 @@ const SquareGame = ({ squaresPromise }: SquareGameProps) => {
 	const initialSquares = use(squaresPromise);
 	const { squares, actions } = useSquareStore(initialSquares);
 	const { addSquare, isAddingSquare } = actions.addSquareAction;
+	const { isActive, handleUserActivity } = useIsUserActive(minuteToMillisecond(5));
+	const throttleHandleUserActivity = useThrottleCallback(handleUserActivity, 1000);
+	useHandleUserInteractionEvents(throttleHandleUserActivity);
+	useRedirectInactiveUser(isActive);
 
 	return (
-		<div>
-			<button disabled={isAddingSquare} onClick={addSquare}>
-				{isAddingSquare ? "Adding…" : "Add square"}
-			</button>
+		<div className={styles.container}>
+			<code>isActive: {isActive ? "true" : "false"}</code>
+			<p>Press the button below to add a new square to the board.</p>
+			<Button variant="primary" label="Add square" disabled={isAddingSquare} onClick={addSquare} />
 			<SquareGrid squares={squares} />
 		</div>
 	);
