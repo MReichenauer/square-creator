@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { MessageModal } from "../messageModal/MessageModal";
 import { useSearchParams } from "react-router-dom";
+import { MessageModal } from "../messageModal/MessageModal";
 
 const SessionExpiredModal = () => {
 	const [searchParams, setSearchParams] = useSearchParams();

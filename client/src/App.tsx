@@ -1,7 +1,7 @@
 import { Header } from "@layout/header/Header";
 import { HomePage } from "@pages/homePage/HomePage";
 import { IsolatedTestPage } from "@pages/isolatedTestPage/IsolatedTestPage";
-import SquareGamePage from "@pages/SquareGamePage/SquareGamePage";
+import { SquareGamePage } from "@pages/squareGamePage/SquareGamePage";
 import { Route, Routes } from "react-router-dom";
 
 function App() {

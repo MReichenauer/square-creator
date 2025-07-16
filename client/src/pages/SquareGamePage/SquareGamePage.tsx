@@ -3,9 +3,9 @@ import { SquareGame } from "@components/squareGame/SquareGame";
 import type { SquareType } from "@models/types/square";
 import { squareApi } from "@services/squareApi/squareApi";
 import { Suspense, useState } from "react";
-import ClientQueue from "./clientQueue/ClientQueue";
 import styles from "./SquareGamePage.module.css";
 import { useSignalR } from "@services/signalR/hooks/useSignalR";
+import { ClientQueue } from "./partials/clientQueue/ClientQueue";
 
 const SquareGamePage = () => {
 	const [squaresPromise, setSquaresPromise] = useState<Promise<SquareType[]> | null>(null);
@@ -34,4 +34,4 @@ const SquareGamePage = () => {
 	);
 };
 
-export default SquareGamePage;
+export { SquareGamePage };

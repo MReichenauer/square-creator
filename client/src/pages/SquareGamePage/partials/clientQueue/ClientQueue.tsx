@@ -11,4 +11,4 @@ const ClientQueue = ({ positionInQueue }: ClientQueueProps) => {
 	);
 };
 
-export default ClientQueue;
+export { ClientQueue };

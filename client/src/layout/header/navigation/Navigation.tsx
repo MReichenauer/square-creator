@@ -1,6 +1,6 @@
-import { useCheckBreakpoints } from "@hooks/utils/useCheckBreakpoints.ts/useCheckBreakpoints";
-import NavigationDropDown from "../navigationDropDown/NavigationDropDown";
-import { NavigationBar } from "../partials/navigationBar/NavigationBar";
+import { useCheckBreakpoints } from "@hooks/utils/useCheckBreakpoints/useCheckBreakpoints";
+import NavigationDropDown from "./partials/navigationDropDown/NavigationDropDown";
+import { NavigationBar } from "./partials/navigationBar/NavigationBar";
 
 const Navigation = () => {
 	const { xs, sm } = useCheckBreakpoints();
