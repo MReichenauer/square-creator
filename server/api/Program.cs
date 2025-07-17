@@ -9,15 +9,14 @@ using api.Services.SignalRService;
 using api.Services.SignalRService.utils.BroadcastQueue;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
+var allowedCorsOrigin = builder.Configuration["AllowedCorsOrigin"] ?? "http://localhost:5173";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    options.AddPolicy("corsOriginConfig",
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173")
+                          policy.WithOrigins(allowedCorsOrigin)
                           .WithMethods("GET", "POST")
                           .AllowAnyHeader()
                           .AllowCredentials();
@@ -42,7 +41,7 @@ app.MapScalarApiReference(); // To view the API documentation with scalar, run t
 
 
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("corsOriginConfig");
 app.MapControllers();
 app.MapHub<SignalRHub>("/api/signal-r-hub");
 app.Run();
