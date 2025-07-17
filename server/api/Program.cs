@@ -9,15 +9,15 @@ using api.Services.SignalRService;
 using api.Services.SignalRService.utils.BroadcastQueue;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-var allowedCorsOrigin = Environment.GetEnvironmentVariable("CLIENT_PRODUCTION_URL") ?? "http://localhost:5173";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("corsOriginConfig",
+    options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins(allowedCorsOrigin)
+                          policy.WithOrigins("http://localhost:5173", "https://proud-field-04faaa603.2.azurestaticapps.net")
                           .WithMethods("GET", "POST")
                           .AllowAnyHeader()
                           .AllowCredentials();
@@ -42,7 +42,7 @@ app.MapScalarApiReference(); // To view the API documentation with scalar, run t
 
 
 app.UseHttpsRedirection();
-app.UseCors("corsOriginConfig");
+app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 app.MapHub<SignalRHub>("/api/signal-r-hub");
 app.Run();
