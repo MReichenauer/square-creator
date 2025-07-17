@@ -9,7 +9,8 @@ using api.Services.SignalRService;
 using api.Services.SignalRService.utils.BroadcastQueue;
 
 var builder = WebApplication.CreateBuilder(args);
-var allowedCorsOrigin = builder.Configuration["AllowedCorsOrigin"] ?? "http://localhost:5173";
+
+var allowedCorsOrigin = Environment.GetEnvironmentVariable("CLIENT_PRODUCTION_URL") ?? "http://localhost:5173";
 
 builder.Services.AddCors(options =>
 {
