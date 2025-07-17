@@ -1,5 +1,6 @@
-import styles from "./HomePage.module.css";
 import { SessionExpiredModal } from "@components/modals/sessionExpiredModal/SessionExpiredModal";
+import styles from "./HomePage.module.css";
+
 const HomePage = () => {
 	return (
 		<>
