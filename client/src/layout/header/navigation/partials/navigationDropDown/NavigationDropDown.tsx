@@ -38,4 +38,4 @@ const NavigationDropDown = () => {
 	);
 };
 
-export default NavigationDropDown;
+export { NavigationDropDown };
