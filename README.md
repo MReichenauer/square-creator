@@ -15,8 +15,9 @@ My attempt to solve [Wizardworks programming task](https://github.com/Wizardwork
 * [API Documentation](#api-documentation)
   * [Environment](#environment)
   * [Endpoints](#endpoints)
-  * [Examples](#examples)
-
+    * [/api/square](#apisquare)
+      * [GET](#method-get)
+      * [POST](#method-post)
 ---
 ## Task
 ### Summary
@@ -91,83 +92,82 @@ npm run dev
 * **Scalar API documentation:** `http://localhost:5000/scalar`
 
 ### Endpoints
-**Route** : `/api/square`
+* #### `/api/square`
+  **Available methods** : `GET`, `POST`
 
-**Available methods** : `GET`, `POST`
-### Examples
-* **Method**: `GET`
-  * **Request header:** None
-  * **Request body:** None
-  * **Response status:** `200 OK`
-  * **Response body:**
-
-      ```json
-      [
-        {
-          "id": 1,
-          "x": 0,
-          "y": 0,
-          "color": "#e60f59"
-        },
-        {
-          "id": 2,
-          "x": 1,
-          "y": 0,
-          "color": "#e2d9f7"
-        }
-      ]
-    ```
-  * **Method**: `POST`
-  * **Request header:** None
-  * **Request body:**
-    ```json
-    {
-      "x": 1,
-      "y": 0,
-      "color": "#e2d9f7"
-    }
-    ```
-  * **Response status:** `201 CREATED`
-  * **Response body:**
-
-      ```json
+  * #### Method: `GET`
+    * **Request header:** None
+    * **Request body:** None
+    * **Response status:** `200 OK`
+    * **Response body:**
+  
+        ```json
+        [
+          {
+            "id": 1,
+            "x": 0,
+            "y": 0,
+            "color": "#e60f59"
+          },
           {
             "id": 2,
             "x": 1,
             "y": 0,
             "color": "#e2d9f7"
           }
-    ```
-**Example of a invalid request with response**
-* **Request body:**
-    ```json
-    {
-      "x": null,
-      "y": null,
-      "color": "F1F1F1"
-    }
-    ```
-* **Response status:** `400 Bad Request`
-* **Response body:**
-
-    ```json
-    {
-      "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
-      "title": "One or more validation errors occurred.",
-      "status": 400,
-      "errors": {
-        "x": [
-          "X is required and must be an integer."
-        ],
-        "y": [
-          "Y is required and must be an integer."
-        ],
-        "color": [
-          "Color must be a valid hex code."
         ]
-      },
-      "traceId": "00-c75853cd590f0c6c75bdeda12430d676-c9cda864833bb172-00"
-    }
+      ```
+  * #### Method: `POST`
+    * **Request header:** None
+    * **Request body:**
+      ```json
+      {
+        "x": 1,
+        "y": 0,
+        "color": "#e2d9f7"
+      }
+      ```
+    * **Response status:** `201 CREATED`
+    * **Response body:**
+   
+        ```json
+            {
+              "id": 2,
+              "x": 1,
+              "y": 0,
+              "color": "#e2d9f7"
+            }
+      ```
+    **Example of a invalid request with response**
+   * **Request body:**
+      ```json
+      {
+        "x": null,
+        "y": null,
+        "color": "F1F1F1"
+      }
+      ```
+   * **Response status:** `400 Bad Request`
+   * **Response body:**
+   
+      ```json
+      {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "errors": {
+          "x": [
+            "X is required and must be an integer."
+          ],
+          "y": [
+            "Y is required and must be an integer."
+          ],
+          "color": [
+            "Color must be a valid hex code."
+          ]
+       },
+       "traceId": "00-c75853cd590f0c6c75bdeda12430d676-c9cda864833bb172-00"
+     }
   ```
 
 
