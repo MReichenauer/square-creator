@@ -149,7 +149,6 @@ npm run dev
       ```
    * **Response status:** `400 Bad Request`
    * **Response body:**
-   
       ```json
       {
         "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
@@ -168,6 +167,3 @@ npm run dev
        },
        "traceId": "00-c75853cd590f0c6c75bdeda12430d676-c9cda864833bb172-00"
      }
-  ```
-
-
