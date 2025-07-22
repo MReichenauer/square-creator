@@ -6,9 +6,9 @@ namespace api.Dtos
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "x is required and must be an integer.")]
-        public double? X { get; set; }
+        public int? X { get; set; }
         [Required(ErrorMessage = "y is required and must be an integer.")]
-        public double? Y { get; set; }
+        public int? Y { get; set; }
         [Required]
         [RegularExpression(@"^#([A-Fa-f0-9]{6})$", ErrorMessage = "color must be a valid hex code.")]
         public required string Color { get; set; }
