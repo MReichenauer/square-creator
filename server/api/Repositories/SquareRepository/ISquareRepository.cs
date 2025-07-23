@@ -1,12 +1,11 @@
-
 using api.Dtos;
-using api.models;
+using api.Models;
 
-namespace api.repositories.SquareRepository
+namespace api.Repositories.SquareRepository
 {
     public interface ISquareRepository
     {
-        IEnumerable<Square> GetAll();
-        void Insert(SquareDto square);
+        Task<IEnumerable<Square>> GetAllAsync();
+        Task<Square> InsertAsync(SquareDto square);
     }
 }

@@ -1,19 +1,13 @@
+import { BREAKPOINTS } from "@assets/breakpoints/BREAKPOINTS";
+
 const currentBreakpoint = (currentWidth: number) => {
-	const breakPoints = {
-		xs: 480,
-		sm: 697,
-		md: 768,
-		lg: 1024,
-		xl: 1439,
-		xxl: 1440,
-	};
 	return {
-		xs: currentWidth <= breakPoints.xs,
-		sm: currentWidth > breakPoints.xs && currentWidth <= breakPoints.sm,
-		md: currentWidth > breakPoints.sm && currentWidth <= breakPoints.md,
-		lg: currentWidth > breakPoints.md && currentWidth <= breakPoints.lg,
-		xl: currentWidth > breakPoints.lg && currentWidth <= breakPoints.xl,
-		xxl: currentWidth > breakPoints.xl,
+		xs: currentWidth <= BREAKPOINTS.xs,
+		sm: currentWidth > BREAKPOINTS.xs && currentWidth <= BREAKPOINTS.sm,
+		md: currentWidth > BREAKPOINTS.sm && currentWidth <= BREAKPOINTS.md,
+		lg: currentWidth > BREAKPOINTS.md && currentWidth <= BREAKPOINTS.lg,
+		xl: currentWidth > BREAKPOINTS.lg && currentWidth <= BREAKPOINTS.xl,
+		xxl: currentWidth > BREAKPOINTS.xl,
 	};
 };
 

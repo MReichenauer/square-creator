@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import { Logo } from "@components/logo/Logo";
-import Navigation from "./navigation/Navigation";
+import { Navigation } from "./navigation/Navigation";
 
 const Header = () => {
 	return (

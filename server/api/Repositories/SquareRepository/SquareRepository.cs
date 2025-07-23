@@ -1,10 +1,10 @@
 using api.Dtos;
-using api.models;
+using api.Models;
 using api.Services.GenerateSquareIdService;
 using api.Services.JsonDataService;
 using api.Services.ValidateColorService;
 
-namespace api.repositories.SquareRepository
+namespace api.Repositories.SquareRepository
 {
     public class SquareRepository : ISquareRepository
     {
@@ -24,21 +24,25 @@ namespace api.repositories.SquareRepository
             _validateColorService = validateColorService;
         }
 
-        public IEnumerable<Square> GetAll()
+        public async Task<IEnumerable<Square>> GetAllAsync()
         {
-            return _jsonDataService.ReadObjectsInArray<Square>(_squaresDataFilePath);
+            return await _jsonDataService.ReadObjectsInArrayAsync<Square>(_squaresDataFilePath);
         }
 
-        public void Insert(SquareDto square)
+        public async Task<Square> InsertAsync(SquareDto squareDto)
         {
-            Square? lastSquare = _jsonDataService
-               .ReadSingleObject<Square>(_lastSquareDataFilePath);
-
-            square.Id = _generateSquareIdService.GenerateId(lastSquare);
-            _validateColorService.ValidateColor(square.Color, lastSquare?.Color ?? string.Empty);
-            _jsonDataService.AppendObject(_squaresDataFilePath, square);
-            _jsonDataService.OweriteObject(_lastSquareDataFilePath, square);
-
+            Square? lastSquare = await _jsonDataService.ReadSingleObjectAsync<Square>(_lastSquareDataFilePath);
+            _validateColorService.ValidateColor(squareDto.Color, lastSquare?.Color ?? string.Empty);
+            Square newSquare = new()
+            {
+                Id = _generateSquareIdService.GenerateId(lastSquare),
+                Color = squareDto.Color,
+                X = squareDto.X ?? 0,
+                Y = squareDto.Y ?? 0
+            };
+            await _jsonDataService.AppendObjectAsync(_squaresDataFilePath, newSquare);
+            await _jsonDataService.OverwriteObjectAsync(_lastSquareDataFilePath, newSquare);
+            return newSquare;
         }
     }
 }
