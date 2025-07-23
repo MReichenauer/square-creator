@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace api.utils
+namespace api.Utils
 {
     public class NewJsonSerializerOptions
     {

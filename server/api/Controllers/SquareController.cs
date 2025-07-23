@@ -1,40 +1,26 @@
-
 using api.Dtos;
-using api.models;
-using api.repositories.SquareRepository;
+using api.Models;
+using api.Repositories.SquareRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class SquareController(ISquareRepository squareRepository) : ControllerBase
+public class SquareController(ISquareRepository _squareRepository) : ControllerBase
 {
-    private readonly ISquareRepository _squareRepository = squareRepository;
-
     [HttpGet]
-    public ActionResult<IEnumerable<Square>> GetAll()
+    public async Task<ActionResult<IEnumerable<Square>>> GetAll()
     {
-        IEnumerable<Square> result = _squareRepository.GetAll();
-        return Ok(result);
+        return Ok(await _squareRepository.GetAllAsync());
     }
     [HttpPost]
-    public ActionResult Insert(SquareDto square)
+    public async Task<ActionResult> Insert([FromBody] SquareDto squareDto)
     {
-        if (square == null)
-        {
-            return BadRequest("Square cannot be null.");
-        }
-
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         try
         {
-            _squareRepository.Insert(square);
-            return CreatedAtAction(nameof(GetAll), square);
+            Square newSquare = await _squareRepository.InsertAsync(squareDto);
+            return Created(string.Empty, newSquare);
         }
         catch (InvalidOperationException exception)
         {

@@ -1,5 +1,5 @@
 :root {
-	/* Color palette */
+	/* Main colors */
 	--primary-color: #5890fc;
 	--secondary-color: #9c4eff;
 	--tertiary-color: #b17dfb;
@@ -21,7 +21,7 @@
 	--primary-background-color-dark: var(--black);
 	--secondary-background-color-dark: var(--medium-grey);
 
-	/* Square colors */
+	/* Complementary colors */
 	--red: #ff6666;
 	--dark-red: #990000;
 	--orange: #fec457;
