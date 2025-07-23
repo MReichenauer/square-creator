@@ -14,7 +14,7 @@ const NavigationDropDown = () => {
 	useHandleClickOutsideEvent(navRef, () => setIsOpen(false));
 
 	return (
-		<nav id="naven" ref={navRef} className={styles.navigation}>
+		<nav ref={navRef} className={styles.navigation}>
 			<button
 				className={styles.toggleDropDown}
 				onClick={() => setIsOpen((prev) => !prev)}
