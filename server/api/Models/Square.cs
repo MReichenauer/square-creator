@@ -1,5 +1,5 @@
 
-namespace api.models;
+namespace api.Models;
 
 public class Square
 {

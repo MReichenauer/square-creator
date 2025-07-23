@@ -1,4 +1,4 @@
-using api.models;
+using api.Models;
 
 namespace api.Services.GenerateSquareIdService
 {

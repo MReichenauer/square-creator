@@ -1,6 +1,6 @@
 using api.Dtos;
-using api.models;
-using api.repositories.SquareRepository;
+using api.Models;
+using api.Repositories.SquareRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.controllers;

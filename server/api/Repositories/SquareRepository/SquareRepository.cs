@@ -1,10 +1,10 @@
 using api.Dtos;
-using api.models;
+using api.Models;
 using api.Services.GenerateSquareIdService;
 using api.Services.JsonDataService;
 using api.Services.ValidateColorService;
 
-namespace api.repositories.SquareRepository
+namespace api.Repositories.SquareRepository
 {
     public class SquareRepository : ISquareRepository
     {
