@@ -62,17 +62,21 @@ jobs:
       - name: Log in to Azure
         uses: azure/login@v2
         with:
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Set Azure App Settings
         uses: azure/cli@v2
         with:
           inlineScript: |
-            az webapp config appsettings set --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.AZURE_WEBAPP_NAME }} --settings "CorsSettings__AllowedOrigin=https://proud-field-04faaa603.2.azurestaticapps.net" "AccessKey=${{ secrets.API_ACCESS_KEY }}"
+            az webapp config appsettings set \
+              --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+              --name ${{ env.AZURE_WEBAPP_NAME }} \
+              --settings \
+                CorsSettings__AllowedOrigin=https://proud-field-04faaa603.2.azurestaticapps.net \
+                AccessKey=${{ secrets.API_ACCESS_KEY }}
 
       - name: Deploy
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
