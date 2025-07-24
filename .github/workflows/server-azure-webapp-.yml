@@ -15,7 +15,7 @@ env:
   SOLUTION_PATH: "./server/server.sln"
   API_PROJECT_PATH: "./server/api/api.csproj"
   PUBLISH_DIR: "./publish"
-
+  AZURE_RESOURCE_GROUP: "square-creator-api-group"
 jobs:
   build-and-test:
     name: Build and Test
@@ -59,20 +59,20 @@ jobs:
           name: webapp
           path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
+      - name: Set Azure App Settings
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            az webapp config appsettings set --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.AZURE_WEBAPP_NAME }} --settings "CorsSettings__AllowedOrigin=https://proud-field-04faaa603.2.azurestaticapps.net" "AccessKey=${{ secrets.API_ACCESS_KEY }}"
+
       - name: Deploy
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-          app-settings: |
-            [
-              {
-                "name": "CorsSettings__AllowedOrigin",
-                "value": "https://proud-field-04faaa603.2.azurestaticapps.net"
-              },
-              {
-                "name": "AccessKey",
-                "value": "${{ secrets.API_ACCESS_KEY }}"
-              }
-            ]
