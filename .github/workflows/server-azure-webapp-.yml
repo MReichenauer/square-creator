@@ -16,6 +16,7 @@ env:
   API_PROJECT_PATH: "./server/api/api.csproj"
   PUBLISH_DIR: "./publish"
   AZURE_RESOURCE_GROUP: "square-creator-api-group"
+  PROD_URL: "https://proud-field-04faaa603.2.azurestaticapps.net"
 jobs:
   build-and-test:
     name: Build and Test
@@ -72,7 +73,7 @@ jobs:
               --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
               --name ${{ env.AZURE_WEBAPP_NAME }} \
               --settings \
-                CorsSettings__AllowedOrigin=https://proud-field-04faaa603.2.azurestaticapps.net \
+                CorsSettings__AllowedOrigin=${{ env.PROD_URL }} \
                 AccessKey=${{ secrets.API_ACCESS_KEY }}
 
       - name: Deploy
