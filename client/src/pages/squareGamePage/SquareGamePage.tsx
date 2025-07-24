@@ -16,7 +16,7 @@ const SquareGamePage = () => {
 	}
 
 	return (
-		<section className={styles.container}>
+		<section className={`${styles.section} pageFlexColContainer`}>
 			{squaresPromise ? (
 				<ErrorBoundary fallback={"An error occurred while loading the game."}>
 					<h2>Square Game</h2>
