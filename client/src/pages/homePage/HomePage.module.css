@@ -1,12 +1,5 @@
 .section {
 	text-wrap: pretty;
-	margin-top: var(--spacing-4);
-	display: flex;
-	padding-inline: var(--spacing-6);
-	flex-direction: column;
-	margin-inline: auto;
-	max-width: 1250px;
-	max-height: 90dvh;
 }
 
 .section h2 {
@@ -16,17 +9,23 @@
 
 .section h3 {
 	color: var(--secondary-color);
-	margin-top: var(--spacing-6);
+	margin-top: var(--spacing-4);
 }
 
 .section h4 {
 	color: var(--secondary-color);
-	margin-top: var(--spacing-3);
+	margin-top: var(--spacing-2);
 	margin-bottom: var(--spacing-1);
 }
 
+.section p:nth-child(6),
+.section p:nth-child(7) {
+	margin-top: var(--spacing-2);
+}
+
 .section ul {
-	list-style-type: none;
+	margin-left: 1rem;
+	list-style-type: disc;
 	& li {
 		margin-block: var(--spacing-1);
 	}

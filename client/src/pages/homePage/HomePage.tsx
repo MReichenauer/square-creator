@@ -1,26 +1,38 @@
 import { SessionExpiredModal } from "@components/modals/sessionExpiredModal/SessionExpiredModal";
 import styles from "./HomePage.module.css";
+import { TargetBlankLink } from "@components/targetBlankLink/TargetBlankLink";
 
 const HomePage = () => {
 	return (
 		<>
 			<SessionExpiredModal />
-			<section className={styles.section}>
+			<section className={`${styles.section} pageFlexColContainer`}>
 				<h2>Home</h2>
 				<p>Welcome to Square Creator. This project is the result of my attempt to tackle Wizardworks code challenge.</p>
-				<h3>Summary of Wizardworks challenge</h3>
-				<h4>Functional requirements</h4>
+				<h3>Wizardworks challenge</h3>
+				<h4>Summary</h4>
 				<p>
-					The goal of the challenge is to create a website where players can create potentionaly an endless amount of
-					squares displayed in a pattern where the squares eventually create a square shape. The squares can be created
-					by pressing a button. The newly created square must have a random color but it can never be the same as the
-					previous square. Each time a new square is created, the result of the new square (position & color) must be
-					stored via the API to a JSON disk.
+					Create a webpage where users can create an infinite number of squares, that positions itself in a square-like
+					pattern to eventually form a square shape.
 				</p>
-				<h4>Technical requirements</h4>
-				<p>The website shall be developed in React.js and the API in .NET / C#.</p>
-				<h4>Links</h4>
-				<ul>
+				<p>When a square is created it must be given a random color and a position (x and y).</p>
+				<p>
+					All the squares must be stored on a JSON disk via the API, the shown squares must reflect the current state of
+					the JSON disk.
+				</p>
+				<h4 id="technicalRequirements">Technical Requirements</h4>
+				<ul aria-labelledby="technicalRequirements">
+					<li>
+						The webpage must be built using <TargetBlankLink href="https://reactjs.org/" label="React.js" />.
+					</li>
+					<li>
+						The API must be build using{" "}
+						<TargetBlankLink href="https://dotnet.microsoft.com/en-us/languages/csharp" label="C#" />
+						/<TargetBlankLink href="https://learn.microsoft.com/en-us/dotnet/" label=".NET" />.
+					</li>
+				</ul>
+				<h4 id="projectLinks">Project Links</h4>
+				<ul aria-labelledby="projectLinks">
 					<li>
 						<a target="_blank" href="https://github.com/MReichenauer/square-creator">
 							My Github repository for the challenge.
