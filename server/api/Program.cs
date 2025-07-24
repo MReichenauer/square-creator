@@ -10,19 +10,28 @@ using api.Services.SignalRService.utils.BroadcastQueue;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-builder.Services.AddCors(options =>
+var MyAllowedSpecificOrigin = "_myAllowedSpecificOrigin";
+var allowedOrigin = builder.Configuration["CorsSettings:AllowedOrigin"];
+if (!string.IsNullOrEmpty(allowedOrigin))
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    Console.WriteLine($"Allowed origin: {allowedOrigin}");
+    builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowedSpecificOrigin,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173", "https://proud-field-04faaa603.2.azurestaticapps.net")
+                          policy.WithOrigins(allowedOrigin)
                           .WithMethods("GET", "POST")
                           .AllowAnyHeader()
                           .AllowCredentials();
                       });
 });
+}
+else
+{
+    Console.WriteLine("No allowed origin found in configuration.");
+}
+
 builder.Services.AddSignalR();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers()
@@ -41,10 +50,50 @@ builder.Services.AddSingleton<IBroadcastQueue, BroadcastQueue>();
 
 var app = builder.Build();
 
+
+
 app.MapOpenApi();
 app.MapScalarApiReference(); // To view the API documentation with scalar, run the .net application and enter http://localhost:5247/scalar/
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(MyAllowedSpecificOrigin);
+app.Use(async (context, next) =>
+{
+    var secretKey = context.RequestServices.GetRequiredService<IConfiguration>()["AccessKey"];
+
+    string? extractedKey = null;
+
+    if (context.Request.Headers.TryGetValue("Authorization", out var authHeaderValues))
+    {
+        var authHeader = authHeaderValues.FirstOrDefault();
+        if (authHeader?.StartsWith("Bearer ") == true)
+        {
+            extractedKey = authHeader["Bearer ".Length..].Trim();
+        }
+    }
+
+    else if (context.Request.Headers.TryGetValue("access-key", out var accessKeyHeader))
+    {
+        extractedKey = accessKeyHeader.FirstOrDefault();
+    }
+
+    else if (context.Request.Path.StartsWithSegments("/api/signal-r-hub"))
+    {
+        if (context.Request.Query.TryGetValue("access_token", out var accessToken))
+        {
+            extractedKey = accessToken;
+        }
+    }
+
+    if (!string.IsNullOrEmpty(extractedKey) && extractedKey == secretKey)
+    {
+        await next.Invoke();
+    }
+    else
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Unauthorized: Access key is not valid.");
+    }
+});
 app.MapControllers();
 app.MapHub<SignalRHub>("/api/signal-r-hub");
 app.Run();

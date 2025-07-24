@@ -1,6 +1,7 @@
 import type { BaseSquareType, SquareType } from "@models/types/square";
 import { getFormattedErrorResponseDetails } from "../utils/format/error/getFormattedErrorResponseDetails/getFormattedErrorResponseDetails";
 import { apiBaseUrl } from "@services/squareApi/utils/url/apiBaseUrl";
+import { apiAccessKey } from "../utils/url/apiAccessKey";
 
 const insertSquare = async (square: BaseSquareType) => {
 	const response = await fetch(`${apiBaseUrl}/square`, {
@@ -8,6 +9,7 @@ const insertSquare = async (square: BaseSquareType) => {
 		body: JSON.stringify(square),
 		headers: {
 			"Content-Type": "application/json",
+			"access-key": apiAccessKey,
 		},
 	});
 	if (!response.ok) {
