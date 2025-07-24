@@ -1,0 +1,8 @@
+.section {
+	align-items: center;
+}
+
+h2 {
+	margin-bottom: var(--spacing-1);
+	color: var(--secondary-color);
+}
