@@ -9,7 +9,6 @@ import { useIsUserActive } from "@hooks/utils/useIsUserActive/useIsUserActive";
 import { useHandleUserInteractionEvents } from "@hooks/utils/events/useHandleUserInteractionEvents";
 import { useRedirectInactiveUser } from "@hooks/utils/redirect/useRedirectInactiveUser";
 import { minuteToMillisecond } from "@utils/calculate/minuteToMillisecond";
-import { useRedirectOnRevisit } from "@hooks/utils/redirect/useRedirectOnRevisit";
 
 type SquareGameProps = {
 	squaresPromise: Promise<SquareType[]>;
@@ -23,7 +22,7 @@ const SquareGame = ({ squaresPromise }: SquareGameProps) => {
 	const throttleHandleUserActivity = useThrottleCallback(handleUserActivity, 1000);
 	useHandleUserInteractionEvents(throttleHandleUserActivity);
 	useRedirectInactiveUser(isActive);
-	useRedirectOnRevisit();
+
 	return (
 		<div className={styles.container}>
 			<p>Press the button below to add a new square.</p>
