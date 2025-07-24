@@ -7,7 +7,7 @@ import { useSquareStore } from "@hooks/stores/useSquareStore/useSquareStore";
 import { useThrottleCallback } from "@hooks/utils/throttle/useThrottleCallback";
 import { useIsUserActive } from "@hooks/utils/useIsUserActive/useIsUserActive";
 import { useHandleUserInteractionEvents } from "@hooks/utils/events/useHandleUserInteractionEvents";
-import { useRedirectInactiveUser } from "@hooks/utils/useRedirectInactiveUser/useRedirectInactiveUser";
+import { useRedirectInactiveUser } from "@hooks/utils/redirect/useRedirectInactiveUser";
 import { minuteToMillisecond } from "@utils/calculate/minuteToMillisecond";
 
 type SquareGameProps = {

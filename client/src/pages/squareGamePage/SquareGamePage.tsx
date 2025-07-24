@@ -6,9 +6,11 @@ import { Suspense, useState } from "react";
 import styles from "./SquareGamePage.module.css";
 import { useSignalR } from "@services/signalR/hooks/useSignalR";
 import { ClientQueue } from "./partials/clientQueue/ClientQueue";
+import { useRedirectOnRevisit } from "@hooks/utils/redirect/useRedirectOnRevisit";
 
 const SquareGamePage = () => {
 	const [squaresPromise, setSquaresPromise] = useState<Promise<SquareType[]> | null>(null);
+	useRedirectOnRevisit();
 	const { positionInQueue, isAllowedToEnterGame } = useSignalR();
 
 	if (isAllowedToEnterGame && squaresPromise === null) {
