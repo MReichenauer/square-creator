@@ -9,15 +9,14 @@ using api.Services.SignalRService;
 using api.Services.SignalRService.utils.BroadcastQueue;
 using System.Text.Json;
 
-var builder = WebApplication.CreateBuilder(args);
-var MyAllowedSpecificOrigin = "_myAllowedSpecificOrigin";
-var allowedOrigin = builder.Configuration["CorsSettings:AllowedOrigin"];
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+string myAllowedSpecificOrigin = "_myAllowedSpecificOrigin";
+string? allowedOrigin = builder.Configuration["CorsSettings:AllowedOrigin"];
 if (!string.IsNullOrEmpty(allowedOrigin))
 {
-    Console.WriteLine($"Allowed origin: {allowedOrigin}");
     builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowedSpecificOrigin,
+    options.AddPolicy(name: myAllowedSpecificOrigin,
                       policy =>
                       {
                           policy.WithOrigins(allowedOrigin)
@@ -29,7 +28,7 @@ if (!string.IsNullOrEmpty(allowedOrigin))
 }
 else
 {
-    Console.WriteLine("No allowed origin found in configuration.");
+    Console.WriteLine("No allowed origin found in configuration. Make sure to configure 'CorsSettings: AllowedOrigin' with a valid origin in appsettings.");
 }
 
 builder.Services.AddSignalR();
@@ -48,23 +47,23 @@ builder.Services.AddSingleton<IValidateColorService, ValidateColorService>();
 builder.Services.AddSingleton<ISquareRepository, SquareRepository>();
 builder.Services.AddSingleton<IBroadcastQueue, BroadcastQueue>();
 
-var app = builder.Build();
+WebApplication? app = builder.Build();
 
 
 
 app.MapOpenApi();
-app.MapScalarApiReference(); // To view the API documentation with scalar, run the .net application and enter http://localhost:5247/scalar/
+app.MapScalarApiReference(); // To view the API documentation with scalar, run the application and enter http://localhost:5000/scalar/
 app.UseHttpsRedirection();
-app.UseCors(MyAllowedSpecificOrigin);
+app.UseCors(myAllowedSpecificOrigin);
 app.Use(async (context, next) =>
 {
-    var secretKey = context.RequestServices.GetRequiredService<IConfiguration>()["AccessKey"];
+    string? secretKey = context.RequestServices.GetRequiredService<IConfiguration>()["AccessKey"];
 
     string? extractedKey = null;
 
     if (context.Request.Headers.TryGetValue("Authorization", out var authHeaderValues))
     {
-        var authHeader = authHeaderValues.FirstOrDefault();
+        string? authHeader = authHeaderValues.FirstOrDefault();
         if (authHeader?.StartsWith("Bearer ") == true)
         {
             extractedKey = authHeader["Bearer ".Length..].Trim();
