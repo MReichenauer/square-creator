@@ -69,7 +69,9 @@ Through development I prioritized core functionality and more complex task in a 
 
 - **Multiple client connections:** Since the data (squares) are stored in a JSON disk on the server, I had to handle scenarios where multiple clients are trying to access the file simultaneously. To solve this, I created a queueing system using SignalR (for both the front-end and back-end) to ensure that only one client has access to the file at a time.
 
-## How to run the project
+## How to run the project 
+* **Note: You need to have .NET installed on your machine to run the API.** 
+* Microsofts official installation tutorial: https://learn.microsoft.com/en-us/dotnet/core/install/.
 
 1. Clone repository:
 
